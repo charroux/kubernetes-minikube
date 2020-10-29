@@ -134,7 +134,12 @@ kubectl delete deployment myservice
 
 Yaml files can be used instead of using the command "kubectl create deployment" and "kubectl expose deployment"
 
+The yaml file for the deployment: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-deployment.yml
 
-kubectl apply -f myservice-deployment.yml
+The yaml file for the service: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-service.yml
 
-kubectl apply -f myservice-service.yml
+Apply the deployment: kubectl apply -f myservice-deployment.yml
+
+Apply the service: kubectl apply -f myservice-service.yml
+
+Then test if it works as expected.
