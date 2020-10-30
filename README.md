@@ -35,6 +35,10 @@ Then move to the sud directory with cd kubernetes-minikube/MyService where a Doc
 
 ## Test this project using Docker
 
+Compile the Java project: 
+* ./gradlew build   under Linux
+* gradlew build     under Windows
+
 Build the docker image: docker build -t my-service .
 
 Check the image: docker images
