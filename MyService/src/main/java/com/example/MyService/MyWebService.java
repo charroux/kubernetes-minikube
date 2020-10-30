@@ -9,18 +9,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class MyWebService {
 
-    @Value("${backEndURL}")
-    String backEndURL;
-
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String hello(){
-        try{
-            RestTemplate restTemplate = new RestTemplate();
-            String s = restTemplate.getForObject(backEndURL, String.class);
-            return "hello" + " " + s;
-        }catch (Exception e){
-            return e.getLocalizedMessage();
-        }
+        return "Hello !";
     }
 
 }
