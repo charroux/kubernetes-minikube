@@ -61,7 +61,10 @@ Tag the docker image: docker tag imageID yourDockerHubName/imageName:version
 
 Example: docker tag 1dsd512s0d myDockerID/my-service:1
 
-Login to docker hub: docker login
+Login to docker hub: 
+* docker login      or
+* docker login http://hub.docker.com    or
+* docker login -u username -p password
 
 Push the image to the docker hub: docker push yourDockerHubName/imageName:version
 
