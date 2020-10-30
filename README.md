@@ -27,7 +27,7 @@ minikube dashboard
 
 This project contains a web service coded in Java, but the language doesn't matter. This project has already been built and the binary version is there:
 
-First of all, download and uncompress the project: https://github.com/charroux/kubernetes
+First of all, download and uncompress the project: https://github.com/charroux/kubernetes-minikube
 
 You can also use git: git clone https://github.com/charroux/kubernetes-minikube
 
