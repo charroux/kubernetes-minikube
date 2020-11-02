@@ -137,16 +137,54 @@ kubectl delete services myservice
 
 kubectl delete deployment myservice
 
+## Scaling and load balancing
+
+Check if the myservice deployment is running:
+
+kubectl get deployments  
+
+How many instance are actually running:
+
+kubectl get pods 
+
+Start a second instance:
+
+kubectl scale --replicas=2 deployment/myservice
+
+kubectl get deployments
+and 
+kubectl get pods 
+
+again
+
+## Creating a Service of type LoadBalancer
+
+Check if the myservice deployment is running:
+
+kubectl get deployments  
+
+kubectl expose deployment myservice --type=LoadBalancer --port=8080
+
+minikube service myservice --url
+
+Test in your web browser
+
 ## Create a deployment and a service using a yaml file
 
 Yaml files can be used instead of using the command "kubectl create deployment" and "kubectl expose deployment"
 
 The yaml file for the deployment: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-deployment.yml
 
-The yaml file for the service: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-service.yml
+The yaml file for the node port service: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-service.yml
+
+The yaml file for the node port service: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-loadbalancing-service.yml
 
 Apply the deployment: kubectl apply -f myservice-deployment.yml
 
-Apply the service: kubectl apply -f myservice-service.yml
+Apply the node port service: kubectl apply -f myservice-service.yml
+
+or 
+
+Apply the service of type loadbalancer: kubectl apply -f myservice-loadbalancing-service.yml
 
 Then test if it works as expected.
