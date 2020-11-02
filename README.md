@@ -152,7 +152,9 @@ Start a second instance:
 kubectl scale --replicas=2 deployment/myservice
 
 kubectl get deployments
+
 and 
+
 kubectl get pods 
 
 again
