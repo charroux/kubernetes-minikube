@@ -189,7 +189,7 @@ Apply the service of type loadbalancer: kubectl apply -f myservice-loadbalancing
 
 Then test if it works as expected.
 
-## Routing rule to a service using Ingress
+# Routing rule to a service using Ingress
 
 You can use Ingress to expose your Service. 
 Ingress is not a Service type, but it acts as the entry point for your cluster. 
@@ -197,7 +197,7 @@ It lets you consolidate your routing rules into a single resource as it can expo
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
 An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting.
 
-# Set up Ingress on Minikube with the NGINX Ingress Controller
+## Set up Ingress on Minikube with the NGINX Ingress Controller
 
 Enable the NGINX Ingress controller: 
 
