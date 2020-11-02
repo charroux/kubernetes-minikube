@@ -216,9 +216,11 @@ A yaml file for ingress: https://github.com/charroux/kubernetes-minikube/blob/ma
 kubectl apply -f ingress.yml 
 
 Retrieve the IP address of Ingress: 
+
 kubectl get ingress
 
 NAME                 CLASS    HOSTS                  ADDRESS        PORTS   AGE
+
 example-ingress      <none>   myservice.info         192.168.64.2   80      18m
 
 Edit the /etc/hosts file and add at the bottom values for: 
