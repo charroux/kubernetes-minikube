@@ -225,13 +225,26 @@ NAME                 CLASS    HOSTS                  ADDRESS        PORTS   AGE
 
 example-ingress      <none>   myservice.info         192.168.64.2   80      18m
 
-Edit the /etc/hosts file and add at the bottom values for: 
+On Linux: edit the /etc/hosts file and add at the bottom values for: 
 
 ADDRESS     HOSTS
 
 Then check in your Web browser: 
 
 http://myservice.info/
+
+On Windows : edit the hosts file, add 
+
+myservice.info	127.0.0.1
+
+Enable a tunnel for Minikube:
+
+minikube tunnel
+
+Then check in your Web browser: 
+
+http://myservice.info/
+
 
 Create a second deployment and its service, then add a new route to the ingress.yml file.
 
