@@ -233,12 +233,13 @@ Then check in your Web browser:
 
 http://myservice.info/
 
-On Windows : edit the hosts file, add 
+On Windows : edit the c:\windows\system32\drivers\etc\hosts file, add 
 
-myservice.info	127.0.0.1
+127.0.0.1 myservice.info	
 
 Enable a tunnel for Minikube:
 
+Minikube addons enable ingress-dns 
 minikube tunnel
 
 Then check in your Web browser: 
