@@ -239,7 +239,8 @@ On Windows : edit the c:\windows\system32\drivers\etc\hosts file, add
 
 Enable a tunnel for Minikube:
 
-Minikube addons enable ingress-dns 
+Minikube addons enable ingress-dns
+ 
 minikube tunnel
 
 Then check in your Web browser: 
