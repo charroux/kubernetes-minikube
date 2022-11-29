@@ -11,7 +11,7 @@ public class MyWebService {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String hello(){
-        return "Hello !";
+        return "Hey is Ada !";
     }
 
 }
