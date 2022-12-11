@@ -39,11 +39,11 @@ Compile the Java project:
 * ./gradlew build   under Linux
 * gradlew build     under Windows
 
-Build the docker image: docker build -t my-service .
+Build the docker image: docker build -t myservice .
 
 Check the image: docker images
 
-Start the container: docker run -p 4000:8080 -t my-service
+Start the container: docker run -p 4000:8080 -t myservice
 
 8080 is the port of the web service, while 4000 is the port for accessing the container. Test the web service using a web browser: http://localhost:4000 It displays hello.
 
@@ -59,7 +59,7 @@ Retreive the image ID: docker images
 
 Tag the docker image: docker tag imageID yourDockerHubName/imageName:version
 
-Example: docker tag 1dsd512s0d myDockerID/my-service:1
+Example: docker tag 1dsd512s0d myDockerID/myservice:1
 
 Login to docker hub: 
 * docker login      or
@@ -68,7 +68,7 @@ Login to docker hub:
 
 Push the image to the docker hub: docker push yourDockerHubName/imageName:version
 
-Example: docker push myDockerID/my-service:1
+Example: docker push myDockerID/myservice:1
 
 ## Create a kubernetes deployment from a Docker image
 
@@ -91,7 +91,7 @@ Retreive the IP address but notice that this IP address is ephemeral since a pod
 Then retrieve the deployment in the minikube dashboard. 
 Actually the Docker container is runnung inside a Kubernetes pods (look at the pod in the dashboard).
   
-You can also enter inside the container in a interactive mode with: kubectl exec -it podname-rthr5 -- /bin/bash
+You can also enter inside the container in a interactive mode with: kubectl exec -it podname -- /bin/bash
 
 where podname is the name of the pods obtained with: kubectl get pods
 
@@ -130,12 +130,6 @@ This format of this address is NodeIP:NodePort.
 Test this address inside your browser. It should display hello again.
 
 Look from the NodeIP and the NodePort in the minikube dashboard.
-
-## Delete resources 
-
-kubectl delete services myservice
-
-kubectl delete deployment myservice
 
 ## Scaling and load balancing
 
@@ -249,5 +243,11 @@ http://myservice.info/
 
 
 Create a second deployment and its service, then add a new route to the ingress.yml file.
+
+## Delete resources
+
+kubectl delete services myservice
+
+kubectl delete deployment myservice
 
 
