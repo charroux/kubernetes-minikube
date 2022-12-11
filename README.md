@@ -31,7 +31,7 @@ First of all, download and uncompress the project: https://github.com/charroux/k
 
 You can also use git: git clone https://github.com/charroux/kubernetes-minikube
 
-Then move to the sud directory with cd kubernetes-minikube/MyService where a DockerFile is.
+Then move to the sud directory with cd kubernetes-minikube/myservice where a DockerFile is.
 
 ## Test this project using Docker
 
@@ -74,9 +74,9 @@ Example: docker push myDockerID/my-service:1
 
 kubectl get nodes
 
-kubectl create deployment myservice --image=efrei/my-service:2 
+kubectl create deployment myservice --image=efrei/myservice:1 
 
-The image used comes from the Docker hub: https://hub.docker.com/r/efrei/my-service/tags
+The image used comes from the Docker hub: https://hub.docker.com/r/efrei/myservice/tags
 
 But you can use your own image instead.
 
