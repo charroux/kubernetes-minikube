@@ -91,7 +91,8 @@ docker tag imageID yourDockerHubName/imageName:version
 Example: `docker tag 1dsd512s0d myDockerID/myservice:1`
 
 Login to docker hub: 
-```docker login
+```
+docker login
 ```
 or
 ```
@@ -215,7 +216,8 @@ Start a second instance:
 ```
 kubectl scale --replicas=2 deployment/myservice
 ```
-```kubectl get deployments
+```
+kubectl get deployments
 ```
 
 and 
