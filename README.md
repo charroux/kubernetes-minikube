@@ -20,8 +20,10 @@ https://docs.docker.com/docker-for-windows/install-windows-home/
 https://minikube.sigs.k8s.io/docs/start/
 
 Minikube provides a dashboard (web portal). Access the dashboard using the following command:
- 
-`minikube dashboard`
+
+```
+minikube dashboard
+```
 
 ## Download this project
 
@@ -35,69 +37,127 @@ Then move to the sud directory with `cd kubernetes-minikube/myservice` where a D
 
 ## Test this project using Docker
 
-Compile the Java project: 
-* `./gradlew build`   under Linux
-* `gradlew build`     under Windows
+Compile the Java project:
+```
+./gradlew build
+```
+Under Linux, or
+```
+.\gradlew build
+```
+Under Windows
 
-Build the docker image: `docker build -t myservice .`
+Build the docker image:
+```
+docker build -t myservice .
+```
 
-Check the image: `docker images`
+Check the image:
+```
+docker images
+```
 
-Start the container: `docker run -p 4000:8080 -t myservice`
+Start the container:
+```
+docker run -p 4000:8080 -t myservice
+```
 
 8080 is the port of the web service, while 4000 is the port for accessing the container. Test the web service using a web browser: http://localhost:4000 It displays hello.
 
 Ctrl-C to stop the Web Service.
 
-Check the containerID: `docker ps`
+Check the containerID:
+```
+docker ps
+```
 
-Stop the container: `docker stop containerID`
+Stop the container:
+```
+docker stop containerID
+```
 
 ## Publish the image to the Docker Hub
 
-Retreive the image ID: `docker images`
+Retreive the image ID:
+```
+docker images
+```
 
-Tag the docker image: `docker tag imageID yourDockerHubName/imageName:version`
+Tag the docker image: 
+```
+docker tag imageID yourDockerHubName/imageName:version
+```
 
 Example: `docker tag 1dsd512s0d myDockerID/myservice:1`
 
 Login to docker hub: 
-* `docker login`      or
-* `docker login http://hub.docker.com`    or
-* `docker login -u username -p password`
+```docker login
+```
+or
+```
+docker login http://hub.docker.com
+```
+or 
+```
+docker login -u username -p password
+```
 
-Push the image to the docker hub: `docker push yourDockerHubName/imageName:version`
+Push the image to the docker hub:
+```
+docker push yourDockerHubName/imageName:version
+```
 
 Example: `docker push myDockerID/myservice:1`
 
 ## Create a kubernetes deployment from a Docker image
 
-`kubectl get nodes`
-
-`kubectl create deployment myservice --image=efrei/myservice:1 `
+```
+kubectl get nodes
+```
+```
+kubectl create deployment myservice --image=efrei/myservice:1
+```
 
 The image used comes from the Docker hub: https://hub.docker.com/r/efrei/myservice/tags
 
 But you can use your own image instead.
 
-Check the pod: `kubectl get pods`
+Check the pod:
+```
+kubectl get pods
+```
 
 Check if the state is running.
 
-Get complete logs for a pods: `kubectl describe pods`
+Get complete logs for a pods: 
+```
+kubectl describe pods
+```
 
 Retreive the IP address but notice that this IP address is ephemeral since a pods can be deleted and replaced by a new one.
 
 Then retrieve the deployment in the minikube dashboard. 
 Actually the Docker container is runnung inside a Kubernetes pods (look at the pod in the dashboard).
   
-You can also enter inside the container in a interactive mode with: `kubectl exec -it podname -- /bin/bash`
+You can also enter inside the container in a interactive mode with:
+```
+kubectl exec -it podname -- /bin/bash
+```
 
-where podname is the name of the pods obtained with: `kubectl get pods`
+where podname is the name of the pods obtained with:
+```
+kubectl get pods
+```
 
-List the containt of the container with: `ls`
+List the containt of the container with:
+```
+ls
+```
 
-Don't forget to exit the container with: `exit`
+Don't forget to exit the container with:
+```
+exit
+```
 
 ## Expose the Deployment through a service
 
@@ -121,9 +181,14 @@ Type values and their behaviors are:
 
 ## Expose HTTP and HTTPS route using NodePort
 
-`kubectl expose deployment myservice --type=NodePort --port=8080`
+```
+kubectl expose deployment myservice --type=NodePort --port=8080
+```
 
-Retrieve the service address: `minikube service myservice --url`
+Retrieve the service address:
+```
+minikube service myservice --url
+```
 
 This format of this address is `NodeIP:NodePort`.
 
@@ -135,21 +200,29 @@ Look from the NodeIP and the NodePort in the minikube dashboard.
 
 Check if the myservice deployment is running:
 
-`kubectl get deployments`  
+```
+kubectl get deployments
+```
 
 How many instance are actually running:
 
-`kubectl get pods` 
+```
+kubectl get pods
+```
 
 Start a second instance:
 
-`kubectl scale --replicas=2 deployment/myservice`
-
-`kubectl get deployments`
+```
+kubectl scale --replicas=2 deployment/myservice
+```
+```kubectl get deployments
+```
 
 and 
 
-`kubectl get pods` 
+```
+kubectl get pods
+```
 
 again
 
@@ -157,20 +230,25 @@ again
 
 Check if the myservice deployment is running:
 
-`kubectl get deployments`  
+```
+kubectl get deployments
+```
 
 If a service is running in front of the deployment you must delete this service first in ordre to create a new one of kind LoadBalancer. So retreive the service using:
 
+```
 kubectl get services
-
+```
 And delete it:
-
+```
 kubectl delete service serviceName
-
-`kubectl expose deployment myservice --type=LoadBalancer --port=8080`
-
-`minikube service myservice --url`
-
+```
+```
+kubectl expose deployment myservice --type=LoadBalancer --port=8080
+```
+```
+minikube service myservice --url
+```
 Test in your web browser
 
 ## Create a deployment and a service using a yaml file
@@ -183,14 +261,22 @@ The yaml file for the node port service: https://github.com/charroux/kubernetes-
 
 The yaml file for the node port service: https://github.com/charroux/kubernetes-minikube/blob/main/myservice-loadbalancing-service.yml
 
-Apply the deployment: `kubectl apply -f myservice-deployment.yml`
+Apply the deployment:
+```
+kubectl apply -f myservice-deployment.yml
+```
 
-Apply the node port service: `kubectl apply -f myservice-service.yml`
+Apply the node port service: 
+```
+kubectl apply -f myservice-service.yml
+```
 
 or 
 
-Apply the service of type loadbalancer: `kubectl apply -f myservice-loadbalancing-service.yml`
-
+Apply the service of type loadbalancer:
+```
+kubectl apply -f myservice-loadbalancing-service.yml
+```
 Then test if it works as expected.
 
 # Routing rule to a service using Ingress
@@ -205,11 +291,13 @@ An Ingress may be configured to give Services externally-reachable URLs, load ba
 
 Enable the NGINX Ingress controller: 
 
-`minikube addons enable ingress`
-
+```
+minikube addons enable ingress
+```
 Verify that the NGINX Ingress controller is running:
-
-`kubectl get pods -n kube-system`
+```
+kubectl get pods -n kube-system
+```
 
 Create a Deployment and expose it as a NodePort (not a loadbalancer).
 
@@ -217,11 +305,15 @@ Check if it works.
 
 A yaml file for ingress: https://github.com/charroux/kubernetes-minikube/blob/main/ingress.yml
 
-`kubectl apply -f ingress.yml` 
+```
+kubectl apply -f ingress.yml
+```
 
 Retrieve the IP address of Ingress: 
 
-`kubectl get ingress`
+```
+kubectl get ingress
+```
 
 ```
 NAME                 CLASS    HOSTS                  ADDRESS        PORTS   AGE
@@ -243,9 +335,12 @@ On Windows : edit the `c:\windows\system32\drivers\etc\hosts` file, add
 
 Enable a tunnel for Minikube:
 
-`minikube addons enable ingress-dns`
- 
-`minikube tunnel`
+```
+minikube addons enable ingress-dns
+```
+```
+minikube tunnel
+```
 
 Then check in your Web browser: 
 
@@ -256,8 +351,10 @@ Create a second deployment and its service, then add a new route to the ingress.
 
 ## Delete resources
 
-`kubectl delete services myservice`
-
-`kubectl delete deployment myservice`
-
+```
+kubectl delete services myservice
+```
+```
+kubectl delete deployment myservice
+```
 
