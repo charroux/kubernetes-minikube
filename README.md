@@ -159,6 +159,14 @@ Check if the myservice deployment is running:
 
 `kubectl get deployments`  
 
+If a service is running in front of the deployment you must delete this service first in ordre to create a new one of kind LoadBalancer. So retreive the service using:
+
+kubectl get services
+
+And delete it:
+
+kubectl delete service serviceName
+
 `kubectl expose deployment myservice --type=LoadBalancer --port=8080`
 
 `minikube service myservice --url`
