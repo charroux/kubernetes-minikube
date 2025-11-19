@@ -253,6 +253,25 @@ minikube service myservice --url
 ```
 Test in your web browser
 
+## Rolling updates
+
+Rolling updates allow Deployments' update to take place with zero downtime by incrementally updating Pods instances with new ones.
+
+To update the image of the application to version 2, use the set image subcommand, followed by the deployment name and the new image version:
+```
+kubectl set image deployments/my-deployment my-deployment=dockerHudId/my-image:v2
+```
+
+You can also confirm the update by running the rollout status subcommand:
+```
+kubectl rollout status deployments/my-deployment
+```
+
+To roll back the deployment to your last working version, use the rollout undo subcommand:
+```
+kubectl rollout undo deployments/my-deployment
+```
+
 ## Create a deployment and a service using a yaml file
 
 Yaml files can be used instead of using the command `kubectl create deployment` and `kubectl expose deployment`
