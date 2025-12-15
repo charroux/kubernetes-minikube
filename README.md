@@ -317,7 +317,7 @@ minikube addons enable ingress
 ```
 Verify that the NGINX Ingress controller is running:
 ```
-kubectl get pods -n kube-system
+kubectl get pods -n ingress-nginx
 ```
 
 Create a Deployment and expose it as a NodePort (not a loadbalancer).
@@ -339,12 +339,22 @@ kubectl get ingress
 ```
 NAME                 CLASS    HOSTS                  ADDRESS        PORTS   AGE
 
-example-ingress      <none>   myservice.info         192.168.64.2   80      18m
+example-ingress      nginx   myservice.info         192.168.64.2   80      18m
 ```
 
 On Linux: edit the `/etc/hosts` file and add at the bottom values for: 
 
-`ADDRESS     HOSTS`
+IngressAddress myservice.info
+
+Where address is given by:
+```
+minikube ip
+```
+
+On Mac: edit the `/etc/hosts` file and add at the bottom values for: 
+
+127.0.0.1 myservice.info
+
 
 Then check in your Web browser: 
 
