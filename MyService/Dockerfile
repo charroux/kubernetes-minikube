@@ -1,13 +1,19 @@
-# Stage 1: Build
-FROM gradle:8.5-jdk21 AS build
-WORKDIR /app
-COPY build.gradle settings.gradle ./
-COPY src ./src
-RUN gradle build --no-daemon -x test
+# Build stage
+FROM eclipse-temurin:21-jdk-jammy AS build
+WORKDIR /workspace/app
 
-# Stage 2: Run
-FROM eclipse-temurin:21-jre
-WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
+
+RUN chmod +x gradlew
+RUN ./gradlew build -x test
+
+# Runtime stage
+FROM eclipse-temurin:21-jdk-jammy
+VOLUME /tmp
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /workspace/app/build/libs/myservice-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
