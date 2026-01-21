@@ -37,16 +37,6 @@ Then move to the sud directory with `cd kubernetes-minikube/myservice` where a D
 
 ## Test this project using Docker
 
-Compile the Java project:
-```
-./gradlew build
-```
-Under Linux, or
-```
-.\gradlew build
-```
-Under Windows
-
 Build the docker image:
 ```
 docker build -t myservice .
@@ -253,6 +243,25 @@ minikube service myservice --url
 ```
 Test in your web browser
 
+## Rolling updates
+
+Rolling updates allow Deployments' update to take place with zero downtime by incrementally updating Pods instances with new ones.
+
+To update the image of the application to version 2, use the set image subcommand, followed by the deployment name and the new image version:
+```
+kubectl set image deployments/my-deployment my-deployment=dockerHudId/my-image:v2
+```
+
+You can also confirm the update by running the rollout status subcommand:
+```
+kubectl rollout status deployments/my-deployment
+```
+
+To roll back the deployment to your last working version, use the rollout undo subcommand:
+```
+kubectl rollout undo deployments/my-deployment
+```
+
 ## Create a deployment and a service using a yaml file
 
 Yaml files can be used instead of using the command `kubectl create deployment` and `kubectl expose deployment`
@@ -298,7 +307,7 @@ minikube addons enable ingress
 ```
 Verify that the NGINX Ingress controller is running:
 ```
-kubectl get pods -n kube-system
+kubectl get pods -n ingress-nginx
 ```
 
 Create a Deployment and expose it as a NodePort (not a loadbalancer).
@@ -320,12 +329,22 @@ kubectl get ingress
 ```
 NAME                 CLASS    HOSTS                  ADDRESS        PORTS   AGE
 
-example-ingress      <none>   myservice.info         192.168.64.2   80      18m
+example-ingress      nginx   myservice.info         192.168.64.2   80      18m
 ```
 
 On Linux: edit the `/etc/hosts` file and add at the bottom values for: 
 
-`ADDRESS     HOSTS`
+IngressAddress myservice.info
+
+Where address is given by:
+```
+minikube ip
+```
+
+On Mac: edit the `/etc/hosts` file and add at the bottom values for: 
+
+127.0.0.1 myservice.info
+
 
 Then check in your Web browser: 
 
